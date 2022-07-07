@@ -11,6 +11,7 @@ public class PostsResponseDto {
     private String content;
     private String author;
 
+    //조회용 DTO
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();

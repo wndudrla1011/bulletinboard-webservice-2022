@@ -11,6 +11,7 @@ public class PostsUpdateRequestDto {
     private String title;
     private String content;
 
+    //update용 DTO
     @Builder
     public PostsUpdateRequestDto(String title, String content) {
         this.title = title;

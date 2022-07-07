@@ -14,7 +14,7 @@ public class Posts extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //Primary Key
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -24,6 +24,7 @@ public class Posts extends BaseTimeEntity {
 
     private String author;
 
+    //객체 생성 시점에 초기화
     @Builder
     public Posts(String title, String content, String author) {
         this.title = title;
@@ -31,6 +32,7 @@ public class Posts extends BaseTimeEntity {
         this.author = author;
     }
 
+    //Entity 갱신을 위한 메소드
     public void update(String title, String content) {
         this.title = title;
         this.content = content;

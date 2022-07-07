@@ -12,6 +12,7 @@ public class HelloResponseDtoTest {
         int amount = 1000;
 
         //when
+        //name과 amount를 전달 케이스(DTO)에 담음
         HelloResponseDto dto = new HelloResponseDto(name, amount);
 
         //then

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HelloResponseDto {
 
+    //불변 필드+생성자 주입
     private final String name;
     private final int amount;
 
