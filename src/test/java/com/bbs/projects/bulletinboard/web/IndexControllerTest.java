@@ -28,7 +28,7 @@ public class IndexControllerTest {
 
         //then
         //루트 페이지에 해당 문자열이 있는지 검증
-        assertThat(body).contains("This is Welcome Page");
+        assertThat(body).contains("Welcome To Rootable's Free Board");
     }
 
 }

@@ -35,4 +35,10 @@ public class PostsApiController {
         return postsService.findById(id);
     }
 
+    //js의 삭제 요청을 받아 서비스의 삭제 기능을 호출
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
+    }
 }

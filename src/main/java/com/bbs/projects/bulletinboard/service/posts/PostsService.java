@@ -2,12 +2,16 @@ package com.bbs.projects.bulletinboard.service.posts;
 
 import com.bbs.projects.bulletinboard.domain.posts.Posts;
 import com.bbs.projects.bulletinboard.domain.posts.PostsRepository;
+import com.bbs.projects.bulletinboard.web.dto.PostsListResponseDto;
 import com.bbs.projects.bulletinboard.web.dto.PostsResponseDto;
 import com.bbs.projects.bulletinboard.web.dto.PostsSaveRequestDto;
 import com.bbs.projects.bulletinboard.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -43,6 +47,23 @@ public class PostsService {
 
         //조회용 DTO에 조회한 객체를 담은 DTO 객체 반환
         return new PostsResponseDto(entity);
+    }
+
+    //해당 DTO를 받아 가공 후 List로 반환
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    //게시글 존재 여부 확인 후 삭제
+    @Transactional
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+
+        postsRepository.delete(posts);
     }
 
 }
