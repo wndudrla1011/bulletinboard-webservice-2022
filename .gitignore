@@ -3,4 +3,5 @@
 .gradle
 .idea
 
+# 테스트
 application-real-oauth.properties
