@@ -1,5 +1,7 @@
 package com.bbs.projects.bulletinboard.web;
 
+import com.bbs.projects.bulletinboard.config.auth.LoginUser;
+import com.bbs.projects.bulletinboard.config.auth.dto.SessionUser;
 import com.bbs.projects.bulletinboard.service.posts.PostsService;
 import com.bbs.projects.bulletinboard.web.dto.PostsResponseDto;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -9,17 +11,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     //첫 페이지 호출 시, index 뷰를 호출
+    //로그인 성공 시, 세션에 저장된 SessionUser를 가져올 수 있음
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         //Model 객체에 findAllDesc 결과를 담아 index 뷰에 전달
         model.addAttribute("posts", postsService.findAllDesc());
+
+        //세션에 저장된 값이 있을 때만 model에 userName 등록
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";
     }
 
@@ -38,4 +50,5 @@ public class IndexController {
 
         return "posts-update";
     }
+
 }

@@ -1,4 +1,5 @@
 var main = {
+    //각 버튼에 대한 이벤트 처리
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
@@ -11,13 +12,16 @@ var main = {
             _this.delete();
         });
     },
+    //저장
     save : function () {
+            //각 속성 값 포장
             var data = {
                 title: $('#title').val(),
                 author: $('#author').val(),
                 content: $('#content').val()
             };
 
+            //컨트롤러로 api 요청
             $.ajax({
                 type: 'POST',
                 url: '/api/v1/posts',
@@ -31,14 +35,18 @@ var main = {
                 alert(JSON.stringify(error));
             });
         },
+    //수정
     update : function () {
+            //각 속성 값 포장
             var data = {
                 title: $('#title').val(),
                 content: $('#content').val()
             };
 
+            //페이지 구분을 위한 id 값 추출
             var id = $('#id').val();
 
+            //컨트롤러로 api 요청
             $.ajax({
                 type: 'PUT',
                 url: '/api/v1/posts/'+id,
@@ -52,9 +60,12 @@ var main = {
                 alert(JSON.stringify(error));
             });
         },
+    //삭제
     delete : function () {
+            //페이지 구분을 위한 id 값 추출
             var id = $('#id').val();
 
+            //컨트롤러로 api 요청
             $.ajax({
                 type: 'DELETE',
                 url: '/api/v1/posts/'+id,
