@@ -29,6 +29,12 @@ public class OAuthAttributes {
     public static OAuthAttributes of(String registrationId,
                                      String userNameAttributeName,
                                      Map<String, Object> attributes) {
+
+        //registrationId로 네이버 서비스 식별
+        if ("naver".equals(registrationId)) {
+            return ofNaver("id", attributes);
+        }
+
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -42,6 +48,22 @@ public class OAuthAttributes {
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
+    }
+
+    //response 필드의 속성값 추출 후 DTO의 각 속성 값 변환 및 설정
+    private static OAuthAttributes ofNaver(String userNameAttributeName,
+                                           Map<String, Object> attributes) {
+
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+
     }
 
     //셋팅된 속성값을 통해 User 엔티티 생성
