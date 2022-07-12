@@ -17,8 +17,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IndexController {
 
+    //생성자 주입
     private final PostsService postsService;
-    private final HttpSession httpSession;
 
     //첫 페이지 호출 시, index 뷰를 호출
     //로그인 성공 시, 세션에 저장된 SessionUser를 가져올 수 있음
