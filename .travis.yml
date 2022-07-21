@@ -18,8 +18,8 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r bulletinboard-webservice-2022
   - mkdir -p deploy
+  - zip -r bulletinboard-webservice-2022
   - mv bulletinboard-webservice-2022.zip deploy/bulletinboard-webservice-2022.zip
 
 deploy:
