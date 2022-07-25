@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ABSPATH=$(reallink -f $0)
+ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH) # stop.sh 경로
 source ${ABSDIR}/profile.sh # import profile.sh
 
