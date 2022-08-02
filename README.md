@@ -10,3 +10,5 @@ Bulletinboard Webservice 2022
 - Update your Post
 - Delete your Post
 - Login service for Google & Naver
+
+Reference : 스프링 부트와 aws로 혼자 구현하는 웹 서비스 (저자 : 이동욱)
